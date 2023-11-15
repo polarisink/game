@@ -1,0 +1,26 @@
+server:
+  port: 8040
+
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/vgq?autoRec&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    password: root
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect:
+          storage_engine: innodb
+        format_sql: true
+        jdbc:
+          batch_size: 100
+          batch_versioned_data: true
+        order_updates: true
+        order_inserts: true
+cors:
+  enable: true
