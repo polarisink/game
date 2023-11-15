@@ -11,7 +11,7 @@ class Ip2RegionTest {
   Ip2regionSearcher searcher;
   @Test
   void ipInfo() {
-    String baidu = "110.242.68.66";
+    String baidu = "18.188.219.97";
     String github = "20.205.243.166";
     String hk = "45.204.2.254";
     System.out.println(searcher.memorySearch(baidu));
