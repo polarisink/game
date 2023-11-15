@@ -26,6 +26,9 @@ server:
     encoding:
       charset: UTF-8
     context-path: /game
+
+logging:
+  config: classpath:logback-spring.xml
 export:
   password: b123456Y@
   sheet: data
