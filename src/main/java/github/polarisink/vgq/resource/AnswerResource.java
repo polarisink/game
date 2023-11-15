@@ -20,6 +20,10 @@ public class AnswerResource {
   public AnswerResource(AnswerService service) {
     this.service = service;
   }
+  @GetMapping("/ping")
+  public String ping(){
+    return "pong";
+  }
 
   /**
    * 提交
