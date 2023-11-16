@@ -6,6 +6,7 @@ import github.polarisink.vgq.infrastructure.asserts.AssertConst;
 import github.polarisink.vgq.infrastructure.asserts.BaseException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.dreamlu.mica.core.result.R;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -67,6 +68,9 @@ public class GlobalExceptionHandler implements ResponseBodyAdvice<Object> {
                                 Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
     if (o == null) {
       return Response.of(null);
+    }
+    if (o instanceof String){
+      return Response.of(String.valueOf(o));
     }
     if (o instanceof Response) {
       return o;

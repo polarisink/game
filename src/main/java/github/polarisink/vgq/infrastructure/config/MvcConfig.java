@@ -56,6 +56,7 @@ public class MvcConfig implements WebMvcConfigurer {
           .allowCredentials(true)
           .maxAge(3600)
           .allowedHeaders("*");
+      LOG.info("load cors config !");
     }
   }
 
