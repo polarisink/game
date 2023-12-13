@@ -20,8 +20,9 @@ public class AnswerResource {
   public AnswerResource(AnswerService service) {
     this.service = service;
   }
+
   @GetMapping("/ping")
-  public String ping(){
+  public String ping() {
     return "pong";
   }
 
@@ -44,5 +45,15 @@ public class AnswerResource {
   @GetMapping("/export/{password}")
   public void export(@PathVariable String password, HttpServletResponse response) {
     service.export(password, response);
+  }
+
+  /**
+   * 获取index
+   *
+   * @return index
+   */
+  @GetMapping("/index")
+  public int index() {
+    return service.index();
   }
 }

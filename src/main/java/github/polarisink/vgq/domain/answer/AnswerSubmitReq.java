@@ -34,6 +34,8 @@ public class AnswerSubmitReq {
    * 最后一个
    */
   private LastSubmitItem last;
+  @Size(max = 3, message = "不合法的分类")
+  private int index;
 
   @Data
   public static class FirstSubmitItem {

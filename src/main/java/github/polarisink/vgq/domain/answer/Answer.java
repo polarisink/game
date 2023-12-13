@@ -1,19 +1,21 @@
 package github.polarisink.vgq.domain.answer;
 
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.alibaba.excel.annotation.write.style.ContentStyle;
 import com.alibaba.excel.annotation.write.style.HeadStyle;
 import com.alibaba.excel.enums.BooleanEnum;
 import com.alibaba.excel.enums.poi.HorizontalAlignmentEnum;
 import com.alibaba.excel.enums.poi.VerticalAlignmentEnum;
 import github.polarisink.vgq.domain.base.BaseJpaEntity;
-import github.polarisink.vgq.infrastructure.BaseDateConverter;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 /**
@@ -64,4 +66,22 @@ public class Answer extends BaseJpaEntity {
   private Integer lastQuest2;
   private Integer lastQuest3;
   private String lastOtherComments;
+
+  public static Answer convert(AnswerSubmitReq req, String ip, String countryEn) {
+    AnswerSubmitReq.FirstSubmitItem first = req.getStart();
+    AnswerSubmitReq.SecondSubmitItem second = req.getFirst();
+    AnswerSubmitReq.SecondSubmitItem third = req.getSecond();
+    AnswerSubmitReq.LastSubmitItem last = req.getLast();
+    LocalDateTime submitTime = LocalDateTime.now();
+    LocalDateTime startTime = req.getStartTime();
+    return new Answer()
+        .setIp(ip).setRegion(countryEn).setDuration(Duration.between(startTime, submitTime).getSeconds())
+        .setAge(first.getAge()).setStartTime(startTime).setSubmitTime(submitTime)
+        .setStartCheckRadio(first.getCheckRadio()).setStartQuest1(first.getQuest1()).setStartQuest2(first.getQuest2())
+        .setStartQuest3(first.getQuest3()).setStartQuest4(first.getQuest4()).setStartQuest5(first.getQuest5())
+        .setFirstItemOne(second.getItemOne()).setFirstQuest1(second.getQuest1()).setFirstQuest2(second.getQuest2())
+        .setFirstQuest3(second.getQuest3()).setSecondItemOne(third.getItemOne()).setSecondQuest1(third.getQuest1())
+        .setSecondQuest2(third.getQuest2()).setSecondQuest3(third.getQuest3()).setLastQuest1(last.getQuest1())
+        .setLastQuest2(last.getQuest2()).setLastQuest3(last.getQuest3()).setLastOtherComments(last.getOtherComments());
+  }
 }
