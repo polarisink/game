@@ -1,14 +1,11 @@
 package github.polarisink.vgq.application;
 
-import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.google.common.util.concurrent.RateLimiter;
-import github.polarisink.vgq.domain.answer.Answer;
-import github.polarisink.vgq.domain.answer.AnswerRepo;
-import github.polarisink.vgq.domain.answer.AnswerSubmitReq;
-import github.polarisink.vgq.domain.answer.ExportProperties;
+import github.polarisink.vgq.domain.answer.*;
 import github.polarisink.vgq.domain.sort.AnswerSort;
 import github.polarisink.vgq.domain.sort.AnswerSortRepo;
 import github.polarisink.vgq.infrastructure.asserts.AssertUtil;
@@ -59,32 +56,28 @@ public class AnswerService {
     IpInfo ipInfo = ip2regionSearcher.memorySearch(ip);
     String country = ipInfo == null || StrUtil.isBlank(ipInfo.getCountry()) ? "美国" : ipInfo.getCountry();
     String countryEn = CountryAndRegionUtil.getEnByCn(country);
-    Answer answer = Answer.convert(req, ip, countryEn);
+    Answer answer = req.convert(ip,countryEn);
     answerRepo.save(answer);
     AnswerSort first = answerSortRepo.findFirst();
-    first.update(req.getIndex());
+    first.update(answer.num);
     answerSortRepo.save(first);
   }
 
 
-  public void export(String password, HttpServletResponse response) {
+  public void export(Integer index, String password, HttpServletResponse response) throws IOException {
     if (!exportRateLimiter.tryAcquire()) {
       tooFrequentThrow();
     }
     AssertUtil.equals(password, properties.getPassword(), PASSWORD_ERROR);
     //TODO 流写入，防止数据太大OOM
-    long count = answerRepo.count();
-    List<Answer> answerList = answerRepo.findAll();
+    List<Answer> answerList = answerRepo.findByNum(index);
     String sheet = properties.getSheet() + "-" + TimeUtil.format2day(LocalDateTime.now());
-    try (ServletOutputStream outputStream = response.getOutputStream()) {
-      response.setContentType(EXCEL_CONTENT_TYPE);
-      response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-      response.setHeader(CONTENT_DISPOSITION, buildAttachment(sheet + ".csv"));
-      EasyExcel.write(outputStream).head(Answer.class).excelType(ExcelTypeEnum.CSV).sheet(sheet).doWrite(answerList);
-    } catch (IOException e) {
-      LOG.error("导出csv数据失败,{}", e.getMessage());
-      throw new RuntimeException("export csv file failed");
-    }
+    ServletOutputStream outputStream = response.getOutputStream();
+    response.setContentType(EXCEL_CONTENT_TYPE);
+    response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+    response.setHeader(CONTENT_DISPOSITION, buildAttachment(sheet + ".csv"));
+    EasyExcel.write(outputStream).head(Answer.class).excelType(ExcelTypeEnum.CSV).sheet(sheet).doWrite(answerList);
+    IoUtil.close(outputStream);
   }
 
   @Transactional(readOnly = true)

@@ -6,6 +6,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * 问卷
@@ -21,6 +22,11 @@ public class AnswerResource {
     this.service = service;
   }
 
+  /**
+   * ping
+   *
+   * @return pong
+   */
   @GetMapping("/ping")
   public String ping() {
     return "pong";
@@ -29,7 +35,7 @@ public class AnswerResource {
   /**
    * 提交
    *
-   * @param req
+   * @param req 提交请求
    */
   @PostMapping("/submit")
   public void submit(@RequestBody @Validated AnswerSubmitReq req) {
@@ -39,12 +45,13 @@ public class AnswerResource {
   /**
    * 导出
    *
+   * @param index 分组
    * @param password 密码
-   * @param response
+   * @param response 响应
    */
-  @GetMapping("/export/{password}")
-  public void export(@PathVariable String password, HttpServletResponse response) {
-    service.export(password, response);
+  @GetMapping("/export/{index}/{password}")
+  public void export(@PathVariable Integer index,@PathVariable String password, HttpServletResponse response) throws IOException {
+    service.export(index,password, response);
   }
 
   /**

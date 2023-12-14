@@ -1,87 +1,208 @@
 package github.polarisink.vgq.domain.answer;
 
-import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ContentStyle;
 import com.alibaba.excel.annotation.write.style.HeadStyle;
 import com.alibaba.excel.enums.BooleanEnum;
 import com.alibaba.excel.enums.poi.HorizontalAlignmentEnum;
 import com.alibaba.excel.enums.poi.VerticalAlignmentEnum;
 import github.polarisink.vgq.domain.base.BaseJpaEntity;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.time.Duration;
-import java.time.LocalDateTime;
 
 /**
  * @author lqsgo
  */
-@Data
 @Table
 @Entity
 @HeadStyle(horizontalAlignment = HorizontalAlignmentEnum.LEFT, verticalAlignment = VerticalAlignmentEnum.CENTER, wrapped = BooleanEnum.TRUE)
 @ContentStyle(horizontalAlignment = HorizontalAlignmentEnum.LEFT, verticalAlignment = VerticalAlignmentEnum.CENTER, wrapped = BooleanEnum.TRUE)
 public class Answer extends BaseJpaEntity {
-  @ExcelProperty("Age")
-  @Column(columnDefinition = "int not null comment '年龄（0到150）'")
-  private Integer age;
-  @ExcelProperty(value = "StartDate")
-  @Column(columnDefinition = "datetime not null comment '开始回答的时间'")
-  private LocalDateTime startTime;
-  @Column(columnDefinition = "datetime not null comment '提交答案的时间'")
-  @ExcelProperty(value = "EndDate")
-  private LocalDateTime submitTime;
-  @ExcelProperty("Duration(in seconds)")
-  @Column(columnDefinition = "bigint not null comment '持续时间'")
-  private Long duration;
-  @ExcelProperty("IpAddress")
-  @Column(columnDefinition = "varchar(64) not null comment 'ip'")
-  private String ip;
-  @ExcelProperty("Region")
-  @Column(columnDefinition = "varchar(64) not null comment '地区'")
-  private String region;
-  /**
-   * 下面是具体数据===================
-   */
-  private String startCheckRadio;
-  private Integer startQuest1;
-  private Integer startQuest2;
-  private Integer startQuest3;
-  private Integer startQuest4;
-  private Integer startQuest5;
-  private Integer firstItemOne;
-  private Integer firstQuest1;
-  private Integer firstQuest2;
-  private Integer firstQuest3;
-  private Integer secondItemOne;
-  private Integer secondQuest1;
-  private Integer secondQuest2;
-  private Integer secondQuest3;
-  private Integer lastQuest1;
-  private Integer lastQuest2;
-  private Integer lastQuest3;
-  private String lastOtherComments;
+  @Column(columnDefinition = "varchar(128)")
+  public String ip;
+  @Column(columnDefinition = "varchar(128)")
+  public String region;
+  //分组
+  public Integer num;
+  //first
+  //question1
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq01;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq02;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq03;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq04;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq05;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq11;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq12;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq13;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq14;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq15;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq16;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq17;
+  //question2
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq21;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq22;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq23;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq24;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq25;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq26;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq27;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq28;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq29;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq210;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq211;
+  //question3
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq31;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq32;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq33;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq34;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq35;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq36;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq37;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq38;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq39;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq310;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq311;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq312;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq313;
+  //question4
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq41;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq42;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq43;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq44;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq45;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq46;
+  @Column(columnDefinition = "varchar(128)")
+  public String startTq47;
 
-  public static Answer convert(AnswerSubmitReq req, String ip, String countryEn) {
-    AnswerSubmitReq.FirstSubmitItem first = req.getStart();
-    AnswerSubmitReq.SecondSubmitItem second = req.getFirst();
-    AnswerSubmitReq.SecondSubmitItem third = req.getSecond();
-    AnswerSubmitReq.LastSubmitItem last = req.getLast();
-    LocalDateTime submitTime = LocalDateTime.now();
-    LocalDateTime startTime = req.getStartTime();
-    return new Answer()
-        .setIp(ip).setRegion(countryEn).setDuration(Duration.between(startTime, submitTime).getSeconds())
-        .setAge(first.getAge()).setStartTime(startTime).setSubmitTime(submitTime)
-        .setStartCheckRadio(first.getCheckRadio()).setStartQuest1(first.getQuest1()).setStartQuest2(first.getQuest2())
-        .setStartQuest3(first.getQuest3()).setStartQuest4(first.getQuest4()).setStartQuest5(first.getQuest5())
-        .setFirstItemOne(second.getItemOne()).setFirstQuest1(second.getQuest1()).setFirstQuest2(second.getQuest2())
-        .setFirstQuest3(second.getQuest3()).setSecondItemOne(third.getItemOne()).setSecondQuest1(third.getQuest1())
-        .setSecondQuest2(third.getQuest2()).setSecondQuest3(third.getQuest3()).setLastQuest1(last.getQuest1())
-        .setLastQuest2(last.getQuest2()).setLastQuest3(last.getQuest3()).setLastOtherComments(last.getOtherComments());
-  }
+  //last
+  @Column(columnDefinition = "varchar(128)")
+  public String lastTq1;
+  @Column(columnDefinition = "varchar(128)")
+  public String lastTq2;
+  @Column(columnDefinition = "varchar(128)")
+  public String lastTq3;
+  @Column(columnDefinition = "varchar(128)")
+  public String lastTq4;
+  @Column(columnDefinition = "varchar(128)")
+  public String lastTq5;
+  @Column(columnDefinition = "varchar(128)")
+  public String lastTq6;
+  @Column(columnDefinition = "varchar(128)")
+  public String lastTq7;
+  @Column(columnDefinition = "varchar(128)")
+  public String lastTq8;
+  public Integer age;
+  @Column(columnDefinition = "varchar(128)")
+  public String radio1;
+  @Column(columnDefinition = "varchar(128)")
+  public String radio2;
+  @Column(columnDefinition = "varchar(128)")
+  public String radio3;
+  @Column(columnDefinition = "varchar(128)")
+  public String radio4;
+  @Column(columnDefinition = "varchar(128)")
+  public String radio5;
+  @Column(columnDefinition = "varchar(128)")
+  public String otherComments;
+
+  //game
+  //game1
+  @Column(columnDefinition = "varchar(128)")
+  public String game1Tq01;
+  @Column(columnDefinition = "varchar(128)")
+  public String game1Tq02;
+  @Column(columnDefinition = "varchar(128)")
+  public String game1Tq03;
+  @Column(columnDefinition = "varchar(128)")
+  public String game1Tq11;
+  @Column(columnDefinition = "varchar(128)")
+  public String game1Tq12;
+  @Column(columnDefinition = "varchar(128)")
+  public String game1Tq13;
+  public Integer game1Item;
+  //game2
+  @Column(columnDefinition = "varchar(128)")
+  public String game2Tq01;
+  @Column(columnDefinition = "varchar(128)")
+  public String game2Tq02;
+  @Column(columnDefinition = "varchar(128)")
+  public String game2Tq03;
+  @Column(columnDefinition = "varchar(128)")
+  public String game2Tq11;
+  @Column(columnDefinition = "varchar(128)")
+  public String game2Tq12;
+  @Column(columnDefinition = "varchar(128)")
+  public String game2Tq13;
+  public Integer game2Item;
+ //game3
+  @Column(columnDefinition = "varchar(128)")
+  public String game3Tq01;
+  @Column(columnDefinition = "varchar(128)")
+  public String game3Tq02;
+  @Column(columnDefinition = "varchar(128)")
+  public String game3Tq03;
+  @Column(columnDefinition = "varchar(128)")
+  public String game3Tq11;
+  @Column(columnDefinition = "varchar(128)")
+  public String game3Tq12;
+  @Column(columnDefinition = "varchar(128)")
+  public String game3Tq13;
+  public Integer game3Item;
+  //game4
+  @Column(columnDefinition = "varchar(128)")
+  public String game4Tq01;
+  @Column(columnDefinition = "varchar(128)")
+  public String game4Tq02;
+  @Column(columnDefinition = "varchar(128)")
+  public String game4Tq03;
+  @Column(columnDefinition = "varchar(128)")
+  public String game4Tq11;
+  @Column(columnDefinition = "varchar(128)")
+  public String game4Tq12;
+  @Column(columnDefinition = "varchar(128)")
+  public String game4Tq13;
+  public Integer game4Item;
 }
