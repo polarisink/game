@@ -3,29 +3,29 @@ package github.polarisink.vgq.domain.answer;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.List;
+
 @NoArgsConstructor
 @Data
 public class AnswerSubmitReq {
   private int index;
+  private LocalDateTime startTime;
   private StartQuestionnaireDTO startQuestionnaire;
-  private AfterGameQues1DTO afterGameQues1;
-  private AfterGameQues1DTO afterGameQues2;
-  private AfterGameQues1DTO afterGameQues3;
-  private AfterGameQues1DTO afterGameQues4;
+  private List<AfterGameQues1DTO> afterGameQues;
   private LastQuestionnaireDTO lastQuestionnaire;
 
   @NoArgsConstructor
   @Data
   public static class StartQuestionnaireDTO {
-    private Table0DTO table0;
-    private Table1DTO table1;
-    private Table2DTO table2;
-    private Table3DTO table3;
-    private Table4DTO table4;
+    private Table0 table0;
+    private Table1 table1;
+    private Table2 table2;
 
     @NoArgsConstructor
     @Data
-    public static class Table0DTO {
+    public static class Table0 {
       private String quest1;
       private String quest2;
       private String quest3;
@@ -35,19 +35,7 @@ public class AnswerSubmitReq {
 
     @NoArgsConstructor
     @Data
-    public static class Table1DTO {
-      private String quest1;
-      private String quest2;
-      private String quest3;
-      private String quest4;
-      private String quest5;
-      private String quest6;
-      private String quest7;
-    }
-
-    @NoArgsConstructor
-    @Data
-    public static class Table2DTO {
+    public static class Table1 {
       private String quest1;
       private String quest2;
       private String quest3;
@@ -59,28 +47,20 @@ public class AnswerSubmitReq {
       private String quest9;
       private String quest10;
       private String quest11;
+      private String quest12;
     }
 
     @NoArgsConstructor
     @Data
-    public static class Table3DTO {
-
+    public static class Table2 {
       private String quest1;
-
       private String quest2;
-
       private String quest3;
-
       private String quest4;
-
       private String quest5;
-
       private String quest6;
-
       private String quest7;
-
       private String quest8;
-
       private String quest9;
       private String quest10;
       private String quest11;
@@ -88,36 +68,17 @@ public class AnswerSubmitReq {
       private String quest13;
     }
 
-    @NoArgsConstructor
-    @Data
-    public static class Table4DTO {
-
-      private String quest1;
-
-      private String quest2;
-
-      private String quest3;
-
-      private String quest4;
-
-      private String quest5;
-
-      private String quest6;
-
-      private String quest7;
-    }
   }
 
-  @NoArgsConstructor
   @Data
   public static class AfterGameQues1DTO {
-    private TableDTO table0;
-    private TableDTO table1;
-    private Integer itemOne;
+    private Integer gameCode;
+    private Table table0;
+    private Table table1;
+    private Table table2;
 
-    @NoArgsConstructor
     @Data
-    public static class TableDTO {
+    public static class Table {
 
       private String quest1;
 
@@ -129,7 +90,6 @@ public class AnswerSubmitReq {
   }
 
 
-  @NoArgsConstructor
   @Data
   public static class LastQuestionnaireDTO {
     private TableDTO table;
@@ -138,8 +98,8 @@ public class AnswerSubmitReq {
     private String radio2;
     private String radio3;
     private String radio4;
-    private String otherComments;
     private String radio5;
+    private String otherComments;
 
     @NoArgsConstructor
     @Data
@@ -163,19 +123,21 @@ public class AnswerSubmitReq {
     }
   }
 
-  public Answer convert(String ip,String region) {
+  public Answer convert(String ip, String region) {
     Answer answer = new Answer();
-    answer.num = index;
+    answer.classify = index;
     answer.ip = ip;
     answer.region = region;
+    answer.startTime = startTime;
+    answer.endTime = LocalDateTime.now();
     //具体数据
-    StartQuestionnaireDTO.Table0DTO table0 = startQuestionnaire.table0;
+    StartQuestionnaireDTO.Table0 table0 = startQuestionnaire.table0;
     answer.startTq01 = table0.quest1;
     answer.startTq02 = table0.quest2;
     answer.startTq03 = table0.quest3;
     answer.startTq04 = table0.quest4;
     answer.startTq05 = table0.quest5;
-    StartQuestionnaireDTO.Table1DTO table1 = startQuestionnaire.table1;
+    StartQuestionnaireDTO.Table1 table1 = startQuestionnaire.table1;
     answer.startTq11 = table1.quest1;
     answer.startTq12 = table1.quest2;
     answer.startTq13 = table1.quest3;
@@ -183,7 +145,12 @@ public class AnswerSubmitReq {
     answer.startTq15 = table1.quest5;
     answer.startTq16 = table1.quest6;
     answer.startTq17 = table1.quest7;
-    StartQuestionnaireDTO.Table2DTO table2 = startQuestionnaire.table2;
+    answer.startTq18 = table1.quest8;
+    answer.startTq19 = table1.quest9;
+    answer.startTq110 = table1.quest10;
+    answer.startTq111 = table1.quest11;
+    answer.startTq112 = table1.quest12;
+    StartQuestionnaireDTO.Table2 table2 = startQuestionnaire.table2;
     answer.startTq21 = table2.quest1;
     answer.startTq22 = table2.quest2;
     answer.startTq23 = table2.quest3;
@@ -195,28 +162,8 @@ public class AnswerSubmitReq {
     answer.startTq29 = table2.quest9;
     answer.startTq210 = table2.quest10;
     answer.startTq211 = table2.quest11;
-    StartQuestionnaireDTO.Table3DTO table3 = startQuestionnaire.table3;
-    answer.startTq31 = table3.quest1;
-    answer.startTq32 = table3.quest2;
-    answer.startTq33 = table3.quest3;
-    answer.startTq34 = table3.quest4;
-    answer.startTq35 = table3.quest5;
-    answer.startTq36 = table3.quest6;
-    answer.startTq37 = table3.quest7;
-    answer.startTq38 = table3.quest8;
-    answer.startTq39 = table3.quest9;
-    answer.startTq310 = table3.quest10;
-    answer.startTq311 = table3.quest11;
-    answer.startTq312 = table3.quest12;
-    answer.startTq313 = table3.quest13;
-    StartQuestionnaireDTO.Table4DTO table4 = startQuestionnaire.table4;
-    answer.startTq41 = table4.quest1;
-    answer.startTq42 = table4.quest2;
-    answer.startTq43 = table4.quest3;
-    answer.startTq44 = table4.quest4;
-    answer.startTq45 = table4.quest5;
-    answer.startTq46 = table4.quest6;
-    answer.startTq47 = table4.quest7;
+    answer.startTq212 = table2.quest12;
+    answer.startTq213 = table2.quest13;
     LastQuestionnaireDTO.TableDTO table = lastQuestionnaire.table;
     answer.lastTq1 = table.quest1;
     answer.lastTq2 = table.quest2;
@@ -233,46 +180,72 @@ public class AnswerSubmitReq {
     answer.radio4 = lastQuestionnaire.radio4;
     answer.radio5 = lastQuestionnaire.radio5;
     answer.otherComments = lastQuestionnaire.otherComments;
+
     //game1
-    AfterGameQues1DTO.TableDTO table00 = afterGameQues1.table0;
-    AfterGameQues1DTO.TableDTO table01 = afterGameQues1.table1;
+    afterGameQues.sort(Comparator.comparing(AfterGameQues1DTO::getGameCode));
+    AfterGameQues1DTO quesDTO;
+    int i;
+    AfterGameQues1DTO.Table table00;
+
+    i = 0;
+    quesDTO = afterGameQues.get(i);
+    table00 = quesDTO.table0;
     answer.game1Tq01 = table00.quest1;
     answer.game1Tq02 = table00.quest2;
-    answer.game1Tq03 = table00.quest3;
-    answer.game1Tq11 = table01.quest1;
-    answer.game1Tq12 = table01.quest2;
-    answer.game1Tq13 = table01.quest3;
-    answer.game1Item = afterGameQues1.itemOne;
+    table00 = quesDTO.table1;
+    answer.game1Tq11 = table00.quest1;
+    answer.game1Tq12 = table00.quest2;
+    answer.game1Tq13 = table00.quest3;
+    table00 = quesDTO.table2;
+    answer.game1Tq21 = table00.quest1;
+    answer.game1Tq22 = table00.quest2;
+    answer.game1Tq23 = table00.quest3;
+    answer.game1Code = index * 4 + i + 1;
     //game2
-    AfterGameQues1DTO.TableDTO table10 = afterGameQues2.table0;
-    AfterGameQues1DTO.TableDTO table11 = afterGameQues2.table1;
-    answer.game2Tq01 = table10.quest1;
-    answer.game2Tq02 = table10.quest2;
-    answer.game2Tq03 = table10.quest3;
-    answer.game2Tq11 = table11.quest1;
-    answer.game2Tq12 = table11.quest2;
-    answer.game2Tq13 = table11.quest3;
-    answer.game2Item = afterGameQues2.itemOne;
+    i = 1;
+    quesDTO = afterGameQues.get(i);
+    table00 = quesDTO.table0;
+    answer.game2Tq01 = table00.quest1;
+    answer.game2Tq02 = table00.quest2;
+    table00 = quesDTO.table1;
+    answer.game2Tq11 = table00.quest1;
+    answer.game2Tq12 = table00.quest2;
+    answer.game2Tq13 = table00.quest3;
+    table00 = quesDTO.table2;
+    answer.game2Tq21 = table00.quest1;
+    answer.game2Tq22 = table00.quest2;
+    answer.game2Tq23 = table00.quest3;
+    answer.game2Code = index * 4 + i + 1;
     //game3
-    AfterGameQues1DTO.TableDTO table20 = afterGameQues3.table0;
-    AfterGameQues1DTO.TableDTO table21 = afterGameQues3.table1;
-    answer.game3Tq01 = table20.quest1;
-    answer.game3Tq02 = table20.quest2;
-    answer.game3Tq03 = table20.quest3;
-    answer.game3Tq11 = table21.quest1;
-    answer.game3Tq12 = table21.quest2;
-    answer.game3Tq13 = table21.quest3;
-    answer.game3Item = afterGameQues3.itemOne;
+    i = 2;
+    quesDTO = afterGameQues.get(i);
+    table00 = quesDTO.table0;
+    answer.game3Tq01 = table00.quest1;
+    answer.game3Tq02 = table00.quest2;
+    table00 = quesDTO.table1;
+    answer.game3Tq11 = table00.quest1;
+    answer.game3Tq12 = table00.quest2;
+    answer.game3Tq13 = table00.quest3;
+    table00 = quesDTO.table2;
+    answer.game3Tq21 = table00.quest1;
+    answer.game3Tq22 = table00.quest2;
+    answer.game3Tq23 = table00.quest3;
+    answer.game3Code = index * 4 + i + 1;
     //game4
-    AfterGameQues1DTO.TableDTO table30 = afterGameQues4.table0;
-    AfterGameQues1DTO.TableDTO table31 = afterGameQues4.table1;
-    answer.game4Tq01 = table30.quest1;
-    answer.game4Tq02 = table30.quest2;
-    answer.game4Tq03 = table30.quest3;
-    answer.game4Tq11 = table31.quest1;
-    answer.game4Tq12 = table31.quest2;
-    answer.game4Tq13 = table31.quest3;
-    answer.game4Item = afterGameQues4.itemOne;
+    i = 3;
+    quesDTO = afterGameQues.get(i);
+    table00 = quesDTO.table0;
+    answer.game4Tq01 = table00.quest1;
+    answer.game4Tq02 = table00.quest2;
+    table00 = quesDTO.table1;
+    answer.game4Tq11 = table00.quest1;
+    answer.game4Tq12 = table00.quest2;
+    answer.game4Tq13 = table00.quest3;
+    table00 = quesDTO.table2;
+    answer.game4Tq21 = table00.quest1;
+    answer.game4Tq22 = table00.quest2;
+    answer.game4Tq23 = table00.quest3;
+    answer.game4Code = index * 4 + i + 1;
     return answer;
   }
 }

@@ -45,13 +45,13 @@ public class AnswerResource {
   /**
    * 导出
    *
-   * @param index 分组
+   * @param index    分组
    * @param password 密码
    * @param response 响应
    */
-  @GetMapping("/export/{index}/{password}")
-  public void export(@PathVariable Integer index,@PathVariable String password, HttpServletResponse response) throws IOException {
-    service.export(index,password, response);
+  @GetMapping({"/export/{password}/{index}","/export/{password}"})
+  public void export(@PathVariable String password, @PathVariable(required = false) Integer index, HttpServletResponse response) throws IOException {
+    service.export(index, password, response);
   }
 
   /**

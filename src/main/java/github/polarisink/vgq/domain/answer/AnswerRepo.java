@@ -5,5 +5,5 @@ import github.polarisink.vgq.domain.base.BaseJpaRepo;
 import java.util.List;
 
 public interface AnswerRepo extends BaseJpaRepo<Answer> {
-  List<Answer> findByNum(Integer index);
+  List<Answer> findByClassify(Integer index);
 }

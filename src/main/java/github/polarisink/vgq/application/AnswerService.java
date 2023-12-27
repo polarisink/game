@@ -5,7 +5,10 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.google.common.util.concurrent.RateLimiter;
-import github.polarisink.vgq.domain.answer.*;
+import github.polarisink.vgq.domain.answer.Answer;
+import github.polarisink.vgq.domain.answer.AnswerRepo;
+import github.polarisink.vgq.domain.answer.AnswerSubmitReq;
+import github.polarisink.vgq.domain.answer.ExportProperties;
 import github.polarisink.vgq.domain.sort.AnswerSort;
 import github.polarisink.vgq.domain.sort.AnswerSortRepo;
 import github.polarisink.vgq.infrastructure.asserts.AssertUtil;
@@ -56,10 +59,10 @@ public class AnswerService {
     IpInfo ipInfo = ip2regionSearcher.memorySearch(ip);
     String country = ipInfo == null || StrUtil.isBlank(ipInfo.getCountry()) ? "美国" : ipInfo.getCountry();
     String countryEn = CountryAndRegionUtil.getEnByCn(country);
-    Answer answer = req.convert(ip,countryEn);
+    Answer answer = req.convert(ip, countryEn);
     answerRepo.save(answer);
     AnswerSort first = answerSortRepo.findFirst();
-    first.update(answer.num);
+    first.update(answer.classify);
     answerSortRepo.save(first);
   }
 
@@ -70,12 +73,13 @@ public class AnswerService {
     }
     AssertUtil.equals(password, properties.getPassword(), PASSWORD_ERROR);
     //TODO 流写入，防止数据太大OOM
-    List<Answer> answerList = answerRepo.findByNum(index);
-    String sheet = properties.getSheet() + "-" + TimeUtil.format2day(LocalDateTime.now());
+    List<Answer> answerList = index == null ? answerRepo.findAll() : answerRepo.findByClassify(index);
+    String[] nameArray = index == null ? new String[]{properties.getSheet(), TimeUtil.format2day(LocalDateTime.now()), ".csv"} : new String[]{properties.getSheet(), index.toString(), TimeUtil.format2day(LocalDateTime.now()), ".csv"};
+    String sheet = StrUtil.join("-", nameArray);
     ServletOutputStream outputStream = response.getOutputStream();
     response.setContentType(EXCEL_CONTENT_TYPE);
     response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-    response.setHeader(CONTENT_DISPOSITION, buildAttachment(sheet + ".csv"));
+    response.setHeader(CONTENT_DISPOSITION, buildAttachment(sheet));
     EasyExcel.write(outputStream).head(Answer.class).excelType(ExcelTypeEnum.CSV).sheet(sheet).doWrite(answerList);
     IoUtil.close(outputStream);
   }

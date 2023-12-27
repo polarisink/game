@@ -12,14 +12,12 @@ public class AnswerSort extends BaseJpaEntity {
   private Integer first;
   private Integer second;
   private Integer third;
-  private Integer fourth;
 
   public static AnswerSort init() {
     AnswerSort sort = new AnswerSort();
     sort.first = 0;
     sort.second = 0;
     sort.third = 0;
-    sort.fourth = 0;
     return sort;
   }
 
@@ -28,13 +26,12 @@ public class AnswerSort extends BaseJpaEntity {
       case 0 -> first++;
       case 1 -> second++;
       case 2 -> third++;
-      case 3 -> fourth++;
       default -> throw new IllegalStateException("不合法的索引");
     }
   }
 
   public int minIndex() {
-    int[] array = {first, second, third, fourth};
+    int[] array = {first, second, third};
     int min = ArrayUtil.min(array);
     return ArrayUtil.indexOf(array, min);
   }
