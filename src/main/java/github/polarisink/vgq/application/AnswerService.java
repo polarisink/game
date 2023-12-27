@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.dreamlu.mica.ip2region.core.Ip2regionSearcher;
 import net.dreamlu.mica.ip2region.core.IpInfo;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +49,8 @@ public class AnswerService {
   private final ExportProperties properties;
   private final RateLimiter submitRateLimiter = RateLimiter.create(5);
   private final RateLimiter exportRateLimiter = RateLimiter.create(3);
+  private final RateLimiter clearRateLimiter = RateLimiter.create(1);
+
 
   @Transactional(rollbackFor = Exception.class)
   public void submit(AnswerSubmitReq req) {
@@ -95,5 +98,13 @@ public class AnswerService {
    */
   private void tooFrequentThrow() {
     throw new RuntimeException(properties.getFrequentMsg());
+  }
+
+  public void clear(String password) {
+    if (!clearRateLimiter.tryAcquire()) {
+      tooFrequentThrow();
+    }
+    AssertUtil.equals(password, properties.getPassword(), PASSWORD_ERROR);
+    answerRepo.deleteAll();
   }
 }

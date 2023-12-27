@@ -49,9 +49,14 @@ public class AnswerResource {
    * @param password 密码
    * @param response 响应
    */
-  @GetMapping({"/export/{password}/{index}","/export/{password}"})
+  @GetMapping({"/export/{password}/{index}", "/export/{password}"})
   public void export(@PathVariable String password, @PathVariable(required = false) Integer index, HttpServletResponse response) throws IOException {
     service.export(index, password, response);
+  }
+
+  @GetMapping("/clear/{password}")
+  public void clear(@PathVariable String password) {
+    service.clear(password);
   }
 
   /**
