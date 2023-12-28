@@ -64,7 +64,7 @@ public class AnswerService {
     String countryEn = CountryAndRegionUtil.getEnByCn(country);
     Answer answer = req.convert(ip, countryEn);
     answerRepo.save(answer);
-    AnswerSort first = answerSortRepo.findFirst();
+    AnswerSort first = answerSortRepo.findAll().get(0);
     first.update(answer.classify);
     answerSortRepo.save(first);
   }
@@ -89,7 +89,7 @@ public class AnswerService {
 
   @Transactional(readOnly = true)
   public int index() {
-    AnswerSort sort = answerSortRepo.findFirst();
+    AnswerSort sort = answerSortRepo.findAll().get(0);
     return sort.minIndex();
   }
 
