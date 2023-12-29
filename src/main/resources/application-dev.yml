@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/game?autoRec&useUnicode=true&characterEncoding=utf8&useSSL=false&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
-    password: 123456by
-    username: game
+    password: root
+    username: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database: mysql

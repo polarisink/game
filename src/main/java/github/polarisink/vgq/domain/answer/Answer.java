@@ -157,8 +157,8 @@ public class Answer extends BaseJpaEntity {
   public String game2Tq01;
   @Column(columnDefinition = varchar128)
   public String game2Tq02;
-  @Column(columnDefinition = varchar128)
-  public String game2Tq03;
+  /*@Column(columnDefinition = varchar128)
+  public String game2Tq03;*/
   @Column(columnDefinition = varchar128)
   public String game2Tq11;
   @Column(columnDefinition = varchar128)
@@ -178,8 +178,8 @@ public class Answer extends BaseJpaEntity {
   public String game3Tq01;
   @Column(columnDefinition = varchar128)
   public String game3Tq02;
-  @Column(columnDefinition = varchar128)
-  public String game3Tq03;
+  /*@Column(columnDefinition = varchar128)
+  public String game3Tq03;*/
   @Column(columnDefinition = varchar128)
   public String game3Tq11;
   @Column(columnDefinition = varchar128)
@@ -198,8 +198,8 @@ public class Answer extends BaseJpaEntity {
   public String game4Tq01;
   @Column(columnDefinition = varchar128)
   public String game4Tq02;
-  @Column(columnDefinition = varchar128)
-  public String game4Tq03;
+  /*@Column(columnDefinition = varchar128)
+  public String game4Tq03;*/
   @Column(columnDefinition = varchar128)
   public String game4Tq11;
   @Column(columnDefinition = varchar128)
