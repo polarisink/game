@@ -12,6 +12,7 @@ import java.util.List;
 public class AnswerSubmitReq {
   private int index;
   private LocalDateTime startTime;
+  private LocalDateTime endTime;
   private StartQuestionnaireDTO startQuestionnaire;
   private List<AfterGameQues1DTO> afterGameQues;
   private LastQuestionnaireDTO lastQuestionnaire;
@@ -129,7 +130,7 @@ public class AnswerSubmitReq {
     answer.ip = ip;
     answer.region = region;
     answer.startTime = startTime;
-    answer.endTime = LocalDateTime.now();
+    answer.endTime = endTime;
     //具体数据
     StartQuestionnaireDTO.Table0 table0 = startQuestionnaire.table0;
     answer.startTq01 = table0.quest1;
