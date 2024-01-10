@@ -137,8 +137,6 @@ public class Answer extends BaseJpaEntity {
   @Column(columnDefinition = varchar128)
   public String game1Tq01;
   @Column(columnDefinition = varchar128)
-  public String game1Tq02;
-  @Column(columnDefinition = varchar128)
   public String game1Tq11;
   @Column(columnDefinition = varchar128)
   public String game1Tq12;
@@ -150,15 +148,17 @@ public class Answer extends BaseJpaEntity {
   public String game1Tq22;
   @Column(columnDefinition = varchar128)
   public String game1Tq23;
+  @Column(columnDefinition = varchar128)
+  public String game1Tq31;
+  @Column(columnDefinition = varchar128)
+  public String game1Tq32;
+  @Column(columnDefinition = varchar128)
+  public String game1Tq33;
   //game2
   public Integer game2Code;
 
   @Column(columnDefinition = varchar128)
   public String game2Tq01;
-  @Column(columnDefinition = varchar128)
-  public String game2Tq02;
-  /*@Column(columnDefinition = varchar128)
-  public String game2Tq03;*/
   @Column(columnDefinition = varchar128)
   public String game2Tq11;
   @Column(columnDefinition = varchar128)
@@ -171,15 +171,17 @@ public class Answer extends BaseJpaEntity {
   public String game2Tq22;
   @Column(columnDefinition = varchar128)
   public String game2Tq23;
+  @Column(columnDefinition = varchar128)
+  public String game2Tq31;
+  @Column(columnDefinition = varchar128)
+  public String game2Tq32;
+  @Column(columnDefinition = varchar128)
+  public String game2Tq33;
   //game3
   public Integer game3Code;
 
   @Column(columnDefinition = varchar128)
   public String game3Tq01;
-  @Column(columnDefinition = varchar128)
-  public String game3Tq02;
-  /*@Column(columnDefinition = varchar128)
-  public String game3Tq03;*/
   @Column(columnDefinition = varchar128)
   public String game3Tq11;
   @Column(columnDefinition = varchar128)
@@ -192,14 +194,16 @@ public class Answer extends BaseJpaEntity {
   public String game3Tq22;
   @Column(columnDefinition = varchar128)
   public String game3Tq23;
+  @Column(columnDefinition = varchar128)
+  public String game3Tq31;
+  @Column(columnDefinition = varchar128)
+  public String game3Tq32;
+  @Column(columnDefinition = varchar128)
+  public String game3Tq33;
   //game4
   public Integer game4Code;
   @Column(columnDefinition = varchar128)
   public String game4Tq01;
-  @Column(columnDefinition = varchar128)
-  public String game4Tq02;
-  /*@Column(columnDefinition = varchar128)
-  public String game4Tq03;*/
   @Column(columnDefinition = varchar128)
   public String game4Tq11;
   @Column(columnDefinition = varchar128)
@@ -212,5 +216,11 @@ public class Answer extends BaseJpaEntity {
   public String game4Tq22;
   @Column(columnDefinition = varchar128)
   public String game4Tq23;
+  @Column(columnDefinition = varchar128)
+  public String game4Tq31;
+  @Column(columnDefinition = varchar128)
+  public String game4Tq32;
+  @Column(columnDefinition = varchar128)
+  public String game4Tq33;
 
 }

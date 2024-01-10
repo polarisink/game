@@ -77,6 +77,7 @@ public class AnswerSubmitReq {
     private Table table0;
     private Table table1;
     private Table table2;
+    private Table table3;
 
     @Data
     public static class Table {
@@ -192,7 +193,6 @@ public class AnswerSubmitReq {
     quesDTO = afterGameQues.get(i);
     table00 = quesDTO.table0;
     answer.game1Tq01 = table00.quest1;
-    answer.game1Tq02 = table00.quest2;
     table00 = quesDTO.table1;
     answer.game1Tq11 = table00.quest1;
     answer.game1Tq12 = table00.quest2;
@@ -201,13 +201,16 @@ public class AnswerSubmitReq {
     answer.game1Tq21 = table00.quest1;
     answer.game1Tq22 = table00.quest2;
     answer.game1Tq23 = table00.quest3;
+    table00 = quesDTO.table3;
+    answer.game1Tq31 = table00.quest1;
+    answer.game1Tq32 = table00.quest2;
+    answer.game1Tq33 = table00.quest3;
     answer.game1Code = index * 4 + i + 1;
     //game2
     i = 1;
     quesDTO = afterGameQues.get(i);
     table00 = quesDTO.table0;
     answer.game2Tq01 = table00.quest1;
-    answer.game2Tq02 = table00.quest2;
     table00 = quesDTO.table1;
     answer.game2Tq11 = table00.quest1;
     answer.game2Tq12 = table00.quest2;
@@ -216,13 +219,16 @@ public class AnswerSubmitReq {
     answer.game2Tq21 = table00.quest1;
     answer.game2Tq22 = table00.quest2;
     answer.game2Tq23 = table00.quest3;
+    table00 = quesDTO.table3;
+    answer.game2Tq31 = table00.quest1;
+    answer.game2Tq32 = table00.quest2;
+    answer.game2Tq33 = table00.quest3;
     answer.game2Code = index * 4 + i + 1;
     //game3
     i = 2;
     quesDTO = afterGameQues.get(i);
     table00 = quesDTO.table0;
     answer.game3Tq01 = table00.quest1;
-    answer.game3Tq02 = table00.quest2;
     table00 = quesDTO.table1;
     answer.game3Tq11 = table00.quest1;
     answer.game3Tq12 = table00.quest2;
@@ -231,13 +237,16 @@ public class AnswerSubmitReq {
     answer.game3Tq21 = table00.quest1;
     answer.game3Tq22 = table00.quest2;
     answer.game3Tq23 = table00.quest3;
+    table00 = quesDTO.table3;
+    answer.game3Tq31 = table00.quest1;
+    answer.game3Tq32 = table00.quest2;
+    answer.game3Tq33 = table00.quest3;
     answer.game3Code = index * 4 + i + 1;
     //game4
     i = 3;
     quesDTO = afterGameQues.get(i);
     table00 = quesDTO.table0;
     answer.game4Tq01 = table00.quest1;
-    answer.game4Tq02 = table00.quest2;
     table00 = quesDTO.table1;
     answer.game4Tq11 = table00.quest1;
     answer.game4Tq12 = table00.quest2;
@@ -246,6 +255,10 @@ public class AnswerSubmitReq {
     answer.game4Tq21 = table00.quest1;
     answer.game4Tq22 = table00.quest2;
     answer.game4Tq23 = table00.quest3;
+    table00 = quesDTO.table3;
+    answer.game4Tq31 = table00.quest1;
+    answer.game4Tq32 = table00.quest2;
+    answer.game4Tq33 = table00.quest3;
     answer.game4Code = index * 4 + i + 1;
     return answer;
   }
