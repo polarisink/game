@@ -31,8 +31,10 @@ public class AnswerSort extends BaseJpaEntity {
   }
 
   public int minIndex() {
-    int[] array = {first, second, third};
+    //暂时更改
+    /*int[] array = {first, second, third};
     int min = ArrayUtil.min(array);
-    return ArrayUtil.indexOf(array, min);
+    return ArrayUtil.indexOf(array, min);*/
+    return 0;
   }
 }

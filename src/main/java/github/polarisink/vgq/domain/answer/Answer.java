@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 @ContentStyle(horizontalAlignment = HorizontalAlignmentEnum.LEFT, verticalAlignment = VerticalAlignmentEnum.CENTER, wrapped = BooleanEnum.TRUE)
 public class Answer extends BaseJpaEntity {
   private static final String varchar128 = "varchar(128)";
+  private static final String varchar255 = "varchar(255)";
   @Column(columnDefinition = varchar128)
   public String ip;
   @Column(columnDefinition = varchar128)
@@ -138,7 +139,7 @@ public class Answer extends BaseJpaEntity {
   public String game1Tq01;
   @Column(columnDefinition = varchar128)
   public String game1Tq11;
-  @Column(columnDefinition = varchar128)
+  @Column(columnDefinition = varchar255)
   public String game1Tq12;
   @Column(columnDefinition = varchar128)
   public String game1Tq13;
@@ -161,7 +162,7 @@ public class Answer extends BaseJpaEntity {
   public String game2Tq01;
   @Column(columnDefinition = varchar128)
   public String game2Tq11;
-  @Column(columnDefinition = varchar128)
+  @Column(columnDefinition = varchar255)
   public String game2Tq12;
   @Column(columnDefinition = varchar128)
   public String game2Tq13;
@@ -184,7 +185,7 @@ public class Answer extends BaseJpaEntity {
   public String game3Tq01;
   @Column(columnDefinition = varchar128)
   public String game3Tq11;
-  @Column(columnDefinition = varchar128)
+  @Column(columnDefinition = varchar255)
   public String game3Tq12;
   @Column(columnDefinition = varchar128)
   public String game3Tq13;
@@ -206,7 +207,7 @@ public class Answer extends BaseJpaEntity {
   public String game4Tq01;
   @Column(columnDefinition = varchar128)
   public String game4Tq11;
-  @Column(columnDefinition = varchar128)
+  @Column(columnDefinition = varchar255)
   public String game4Tq12;
   @Column(columnDefinition = varchar128)
   public String game4Tq13;
